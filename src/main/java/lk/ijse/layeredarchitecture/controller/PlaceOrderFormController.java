@@ -1,6 +1,6 @@
 package lk.ijse.layeredarchitecture.controller;
 
-import lk.ijse.layeredarchitecture.bo.FactoryBO;
+import lk.ijse.layeredarchitecture.bo.BOFactory;
 import lk.ijse.layeredarchitecture.bo.custom.PlaceOrderBO;
 import lk.ijse.layeredarchitecture.dto.CustomerDTO;
 import lk.ijse.layeredarchitecture.dto.ItemDTO;
@@ -50,7 +50,7 @@ public class PlaceOrderFormController {
     public Label lblDate;
     public Label lblTotal;
     private String orderId;
-    PlaceOrderBO placeOrderBO = (PlaceOrderBO) FactoryBO.getFactoryBO().getBO(FactoryBO.BOTypes.PLACE_ORDER);
+    PlaceOrderBO placeOrderBO = (PlaceOrderBO) BOFactory.getFactoryBO().getBO(BOFactory.BOTypes.PLACE_ORDER);
 
     public void initialize() throws SQLException, ClassNotFoundException {
 

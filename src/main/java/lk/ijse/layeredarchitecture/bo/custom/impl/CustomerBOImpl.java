@@ -1,7 +1,7 @@
 package lk.ijse.layeredarchitecture.bo.custom.impl;
 
 import lk.ijse.layeredarchitecture.bo.custom.CustomerBO;
-import lk.ijse.layeredarchitecture.dao.FactoryDAO;
+import lk.ijse.layeredarchitecture.dao.DAOFactory;
 import lk.ijse.layeredarchitecture.dao.custom.CustomerDAO;
 import lk.ijse.layeredarchitecture.dto.CustomerDTO;
 import lk.ijse.layeredarchitecture.entity.Customer;
@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class CustomerBOImpl implements CustomerBO {
-    CustomerDAO customerDAO = (CustomerDAO) FactoryDAO.getFactoryDAO().getDAO(FactoryDAO.DAOTypes.CUSTOMER);
+    CustomerDAO customerDAO = (CustomerDAO) DAOFactory.getFactoryDAO().getDAO(DAOFactory.DAOTypes.CUSTOMER);
 
     @Override
     public ArrayList<CustomerDTO> getAllCustomer() throws SQLException, ClassNotFoundException {

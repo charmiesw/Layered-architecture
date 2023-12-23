@@ -4,13 +4,13 @@ import lk.ijse.layeredarchitecture.bo.custom.impl.CustomerBOImpl;
 import lk.ijse.layeredarchitecture.bo.custom.impl.ItemBOImpl;
 import lk.ijse.layeredarchitecture.bo.custom.impl.PlaceOrderBOImpl;
 
-public class FactoryBO {
-    private static FactoryBO factoryBO;
+public class BOFactory {
+    private static BOFactory BOFactory;
 
-    private FactoryBO() {}
+    private BOFactory() {}
 
-    public static FactoryBO getFactoryBO() {
-        return factoryBO == null ? factoryBO = new FactoryBO() : factoryBO;
+    public static BOFactory getFactoryBO() {
+        return BOFactory == null ? BOFactory = new BOFactory() : BOFactory;
     }
 
     public enum BOTypes {

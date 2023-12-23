@@ -1,8 +1,7 @@
 package lk.ijse.layeredarchitecture.bo.custom.impl;
 
 import lk.ijse.layeredarchitecture.bo.custom.PlaceOrderBO;
-import lk.ijse.layeredarchitecture.dao.FactoryDAO;
-import com.example.layeredarchitecture.dao.custom.*;
+import lk.ijse.layeredarchitecture.dao.DAOFactory;
 import lk.ijse.layeredarchitecture.db.DBConnection;
 import lk.ijse.layeredarchitecture.dto.CustomerDTO;
 import lk.ijse.layeredarchitecture.dto.ItemDTO;
@@ -19,11 +18,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlaceOrderBOImpl implements PlaceOrderBO {
-    CustomerDAO customerDAO = (CustomerDAO) FactoryDAO.getFactoryDAO().getDAO(FactoryDAO.DAOTypes.CUSTOMER);
-    ItemDAO itemDAO = (ItemDAO) FactoryDAO.getFactoryDAO().getDAO(FactoryDAO.DAOTypes.ITEM);
-    OrderDAO orderDAO = (OrderDAO) FactoryDAO.getFactoryDAO().getDAO(FactoryDAO.DAOTypes.ORDER);
-    OrderDetailsDAO orderDetailsDAO = (OrderDetailsDAO) FactoryDAO.getFactoryDAO().getDAO(FactoryDAO.DAOTypes.ORDER_DETAIL);
-    QueryDAO queryDAO = (QueryDAO) FactoryDAO.getFactoryDAO().getDAO(FactoryDAO.DAOTypes.QUERY);
+    CustomerDAO customerDAO = (CustomerDAO) DAOFactory.getFactoryDAO().getDAO(DAOFactory.DAOTypes.CUSTOMER);
+    ItemDAO itemDAO = (ItemDAO) DAOFactory.getFactoryDAO().getDAO(DAOFactory.DAOTypes.ITEM);
+    OrderDAO orderDAO = (OrderDAO) DAOFactory.getFactoryDAO().getDAO(DAOFactory.DAOTypes.ORDER);
+    OrderDetailsDAO orderDetailsDAO = (OrderDetailsDAO) DAOFactory.getFactoryDAO().getDAO(DAOFactory.DAOTypes.ORDER_DETAIL);
+    QueryDAO queryDAO = (QueryDAO) DAOFactory.getFactoryDAO().getDAO(DAOFactory.DAOTypes.QUERY);
 
     @Override
     public boolean placeOrder(String orderId, LocalDate orderDate, String customerId, List<OrderDetailDTO> orderDetails) throws SQLException, ClassNotFoundException {

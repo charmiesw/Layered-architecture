@@ -1,7 +1,7 @@
 package lk.ijse.layeredarchitecture.bo.custom.impl;
 
 import lk.ijse.layeredarchitecture.bo.custom.ItemBO;
-import lk.ijse.layeredarchitecture.dao.FactoryDAO;
+import lk.ijse.layeredarchitecture.dao.DAOFactory;
 import lk.ijse.layeredarchitecture.dao.custom.ItemDAO;
 import lk.ijse.layeredarchitecture.dto.ItemDTO;
 import lk.ijse.layeredarchitecture.entity.Item;
@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ItemBOImpl implements ItemBO {
-    ItemDAO itemDAO = (ItemDAO) FactoryDAO.getFactoryDAO().getDAO(FactoryDAO.DAOTypes.ITEM);
+    ItemDAO itemDAO = (ItemDAO) DAOFactory.getFactoryDAO().getDAO(DAOFactory.DAOTypes.ITEM);
 
     @Override
     public ArrayList<ItemDTO> getAllItems() throws SQLException, ClassNotFoundException {

@@ -1,6 +1,6 @@
 package lk.ijse.layeredarchitecture.controller;
 
-import lk.ijse.layeredarchitecture.bo.FactoryBO;
+import lk.ijse.layeredarchitecture.bo.BOFactory;
 import lk.ijse.layeredarchitecture.bo.custom.ItemBO;
 import lk.ijse.layeredarchitecture.dto.ItemDTO;
 import lk.ijse.layeredarchitecture.view.tdm.ItemTM;
@@ -36,7 +36,7 @@ public class ManageItemsFormController {
     public TableView<ItemTM> tblItems;
     public TextField txtUnitPrice;
     public JFXButton btnAddNewItem;
-    ItemBO itemBO = (ItemBO) FactoryBO.getFactoryBO().getBO(FactoryBO.BOTypes.ITEM);
+    ItemBO itemBO = (ItemBO) BOFactory.getFactoryBO().getBO(BOFactory.BOTypes.ITEM);
 
     public void initialize() {
         tblItems.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("code"));

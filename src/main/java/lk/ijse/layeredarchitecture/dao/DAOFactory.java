@@ -1,15 +1,14 @@
 package lk.ijse.layeredarchitecture.dao;
 
-import com.example.layeredarchitecture.dao.custom.impl.*;
 import lk.ijse.layeredarchitecture.dao.custom.impl.*;
 
-public class FactoryDAO {
-    private static FactoryDAO factoryDAO;
+public class DAOFactory {
+    private static DAOFactory DAOFactory;
 
-    private FactoryDAO(){}
+    private DAOFactory(){}
 
-    public static FactoryDAO getFactoryDAO() {
-        return factoryDAO == null ? factoryDAO = new FactoryDAO() : factoryDAO;
+    public static DAOFactory getFactoryDAO() {
+        return DAOFactory == null ? DAOFactory = new DAOFactory() : DAOFactory;
     }
 
     public enum DAOTypes {

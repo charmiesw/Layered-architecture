@@ -1,6 +1,6 @@
 package lk.ijse.layeredarchitecture.controller;
 
-import lk.ijse.layeredarchitecture.bo.FactoryBO;
+import lk.ijse.layeredarchitecture.bo.BOFactory;
 import lk.ijse.layeredarchitecture.bo.custom.CustomerBO;
 import lk.ijse.layeredarchitecture.dto.CustomerDTO;
 import lk.ijse.layeredarchitecture.view.tdm.CustomerTM;
@@ -37,7 +37,7 @@ public class ManageCustomersFormController {
     public TextField txtCustomerAddress;
     public TableView<CustomerTM> tblCustomers;
     public JFXButton btnAddNewCustomer;
-    CustomerBO customerBO = (CustomerBO) FactoryBO.getFactoryBO().getBO(FactoryBO.BOTypes.CUSTOMER);
+    CustomerBO customerBO = (CustomerBO) BOFactory.getFactoryBO().getBO(BOFactory.BOTypes.CUSTOMER);
 
     public void initialize() {
         tblCustomers.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("id"));
