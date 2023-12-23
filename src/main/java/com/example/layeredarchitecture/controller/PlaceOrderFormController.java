@@ -1,5 +1,7 @@
 package com.example.layeredarchitecture.controller;
 
+import com.example.layeredarchitecture.bo.PlaceOrderBO;
+import com.example.layeredarchitecture.bo.PlaceOrderBOImpl;
 import com.example.layeredarchitecture.dao.custom.CustomerDAO;
 import com.example.layeredarchitecture.dao.custom.ItemDAO;
 import com.example.layeredarchitecture.dao.custom.OrderDAO;
@@ -61,8 +63,7 @@ public class PlaceOrderFormController {
     CustomerDAO customerDAO = new CustomerDAOImpl();
     ItemDAO itemDAO = new ItemDAOImpl();
     OrderDAO orderDAO = new OrderDAOImpl();
-    OrderDetailsDAO orderDetailsDAO = new OrderDetailsDAOImpl();
-
+    PlaceOrderBO placeOrderBO = new PlaceOrderBOImpl();
 
     public void initialize() throws SQLException, ClassNotFoundException {
 
@@ -333,70 +334,13 @@ public class PlaceOrderFormController {
     }
 
     public boolean saveOrder(String orderId, LocalDate orderDate, String customerId, List<OrderDetailDTO> orderDetails) {
-        /*Transaction*/
-        Connection connection = null;
         try {
-            connection = DBConnection.getDbConnection().getConnection();
-            boolean isExist = orderDAO.exist(orderId);
-            if (isExist) {
-                return false;
-            }
-
-            connection.setAutoCommit(false);
-            boolean isSaved = orderDAO.save(new OrderDTO(orderId, orderDate, customerId));
-
-            if (!isSaved) {
-                connection.rollback();
-                connection.setAutoCommit(true);
-                return false;
-            }
-
-            /*add details to the orderDetails table*/
-
-            for (OrderDetailDTO detail : orderDetails) {
-                boolean isOdSaved = orderDetailsDAO.save(detail);
-
-                if (!isOdSaved) {
-                    connection.rollback();
-                    connection.setAutoCommit(true);
-                    return false;
-                }
-
-//                //Search & Update Item
-                ItemDTO item = findItem(detail.getItemCode());
-                item.setQtyOnHand(item.getQtyOnHand() - detail.getQty());
-
-                boolean isUpdated = itemDAO.update(new ItemDTO(item.getCode(), item.getDescription(), item.getUnitPrice(), item.getQtyOnHand()));
-
-                if (!isUpdated) {
-                    connection.rollback();
-                    connection.setAutoCommit(true);
-                    return false;
-                }
-            }
-
-            connection.commit();
-            connection.setAutoCommit(true);
-            return true;
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-
-    public ItemDTO findItem(String code) {
-        try {
-            return itemDAO.find(code);
-
+            return placeOrderBO.placeOrder(orderId,orderDate,customerId,orderDetails);
         } catch (SQLException e) {
-            throw new RuntimeException("Failed to find the Item " + code, e);
+            throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-        return null;
     }
+
 }
